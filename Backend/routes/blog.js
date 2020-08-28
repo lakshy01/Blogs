@@ -6,8 +6,20 @@ const Blog = mongoose.model('Blog');
 route.get('/', (req, res) => {
     Blog.find()
         .then((blogs) => {
+            let users = {};
+            let newBlogs = blogs.map((blog) => {
+                if (users[blog.username] === true) {
+                    console.log("Your another blog already present in the list");
+                } else {
+                    users[blog.username] = true;
+                    return blog;
+                }
+            });
+            newBlogs = newBlogs.filter((newblog) => {
+                return newblog !== undefined;
+            });
             res.setHeader("Content-Type", "application/json");
-            res.send(blogs);
+            res.send(newBlogs);
         })
         .catch((err) => {
             res.send(err);

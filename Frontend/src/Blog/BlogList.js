@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchBlogs } from '../actions';
 import BlogCard from './BlogCard';
+import './style.css';
 
 class BlogList extends React.Component {
 
@@ -22,8 +23,10 @@ class BlogList extends React.Component {
     render() {
 
         return (
-            <div className="ui special cards" style={{ margin: '10px', marginLeft: '50px' }}>
-                {this.renderList()}
+            <div className="ui container back2">
+                <div className="ui special cards" style={{ margin: '10px', marginLeft: '50px' }}>
+                    {this.renderList()}
+                </div>
             </div>
         )
     }

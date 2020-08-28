@@ -6,3 +6,17 @@ export const fetchBlogs = () => async dispatch => {
     dispatch({ type: 'FETCH_BLOGS', payload: response.data });
 };
 
+export const selectedBlog = (blog) => {
+    return {
+        type: 'SELECTED_BLOG',
+        payload: blog
+    }
+};
+
+export const fetchUserBlogs = (userBlogs) => async dispatch => {
+    if (userBlogs) {
+        const response = await blog.get(`/blog/${userBlogs.userId}`);
+        dispatch({ type: 'FETCH_USER_BLOGS', payload: response.data });
+    }
+};
+

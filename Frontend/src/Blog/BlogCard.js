@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { selectedBlog } from '../actions';
 class BlogCard extends React.Component {
 
 
@@ -28,10 +30,10 @@ class BlogCard extends React.Component {
 
     render() {
 
-        const { imageUrl, title, body, likes, username } = this.props.blog;
+        const { imageUrl, title, body, username } = this.props.blog;
 
         return (
-            <div className="teal card">
+            <div className="teal card" style={{ cursor: 'pointer' }}>
                 <div className="blurring dimmable image">
                     <div className="ui dimmer">
                         <div className="content">
@@ -53,16 +55,22 @@ class BlogCard extends React.Component {
                         <i className="heart icon" style={{ color: this.state.color }} onClick={this.liked}></i>
                         {this.state.isliked} likes
                     </span>
-                    <span class="right floated star">
-                        <i class="user icon"></i>
+                    <span className="right floated star">
+                        <i className="user icon"></i>
                         {username}
                     </span>
                     <a>
                     </a>
+                </div>
+                <div className="ui bottom attached button" onClick={() => this.props.selectedBlog(this.props.blog)} >
+                    <i className="add icon"></i>
+                    <Link to="/BlogDetail" >
+                        More Detail
+                    </Link>
                 </div>
             </div>
         )
     }
 }
 
-export default BlogCard;
+export default connect(null, { selectedBlog })(BlogCard);
